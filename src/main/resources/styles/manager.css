@@ -9,7 +9,7 @@
     -fx-border-color: #D1D1D1;
     -fx-border-radius: 10px;
     -fx-padding: 10px;
-    -fx-effect: dropshadow(three-pass-box, black, 25, 0, 0, 5);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 3);
 }
 
 .buttonManager {
@@ -286,6 +286,6 @@
 
 .editButtonRow:hover {
     -fx-background-color: #017AFF;
-    -fx-background-image: url('../images/edit-hover.png');
+    -fx-background-image: url('../images/editHover.png');
     -fx-cursor: hand;
 }

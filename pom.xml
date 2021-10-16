@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.procedure.manager</groupId>
     <artifactId>ProcedureManager</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.3</version>
     <name>Gerenciador de Procedimentos</name>
     <description>Criado com JavaFX 1.8 + Maven
 Elementos de UI/UX MacOS Big Sur
@@ -32,4 +32,30 @@ Gerencia procedimentos de serviços realizados com comissão.</description>
             <type>jar</type>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>manager.StartApplication</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

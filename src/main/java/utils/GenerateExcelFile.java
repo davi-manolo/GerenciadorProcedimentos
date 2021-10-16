@@ -1,14 +1,13 @@
 package utils;
 
-import com.mysql.cj.result.Row;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Cell;
 import manager.StartApplication;
 import model.ServiceProcedureModel;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -51,7 +50,8 @@ public class GenerateExcelFile {
             HSSFRow row = sheetClients.createRow(rownum++);
             HSSFCell cellDate = row.createCell(cellnum++);
             cellDate.setCellStyle(styleBody());
-            cellDate.setCellValue(procedure.getPerformedIn()); //AQUI
+            cellDate.setCellValue(new SimpleDateFormat("dd/MM/yyyy")
+                    .format(procedure.getPerformedIn()));
             HSSFCell cellClient = row.createCell(cellnum++);
             cellClient.setCellStyle(styleBody());
             cellClient.setCellValue(procedure.getClient());
@@ -60,10 +60,12 @@ public class GenerateExcelFile {
             cellProcedure.setCellValue(procedure.getType().getName());
             HSSFCell cellPrice = row.createCell(cellnum++);
             cellPrice.setCellStyle(styleBody());
-            cellPrice.setCellValue(procedure.getPrice()); //AQUI
+            cellPrice.setCellValue(NumberFormat.getCurrencyInstance()
+                .format(procedure.getPrice()));
             HSSFCell cellReceived = row.createCell(cellnum++);
             cellReceived.setCellStyle(styleBody());
-            cellReceived.setCellValue(procedure.getReceived()); //AQUI
+            cellReceived.setCellValue(NumberFormat.getCurrencyInstance()
+                    .format(procedure.getReceived()));
         }
         HSSFRow rowTotalReceived = sheetClients.createRow(procedures.size() + 2);
         HSSFCell cellTotal = rowTotalReceived.createCell(3);

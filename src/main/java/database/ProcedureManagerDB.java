@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public abstract class ProcedureManagerDB {
     
-    private static Class driver;
+    private static Class<?> driver;
     private static Connection conn;
     
     static {
@@ -34,7 +34,7 @@ public abstract class ProcedureManagerDB {
         try {
             conn = DriverManager.getConnection(database, user, pwd);
         } catch (SQLException e) {
-            System.out.println("Acesso negado ao Banco, verifique banco instância do banco, usuário ou senha: " + e.getMessage());
+            System.out.println("Acesso negado ao Banco, verifique a instância do banco, usuário ou senha: " + e.getMessage());
             return false;
         }
         System.out.println("Conectado ao Banco de Dados!");
@@ -60,7 +60,7 @@ public abstract class ProcedureManagerDB {
         }
     }
 
-    public static Class getDriver() {
+    public static Class<?> getDriver() {
         return driver;
     }
     
@@ -68,6 +68,9 @@ public abstract class ProcedureManagerDB {
         return conn;
     }
     
+    //Usar na tela de conexões da aplicação, ainda não construída.
+    //Ainda em desenvolvimento
+    @SuppressWarnings("unused")
     private static boolean createDatabase() {
         String databaseSQL = "create database procedures_db;";
         String typeTableSQL = "create table procedures_db.procedures_type(" + "\n" +
