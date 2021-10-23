@@ -7,13 +7,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxWidth="315.0" minWidth="315.0" prefWidth="315.0" styleClass="appBody" stylesheets="@../styles/manager.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AboutAppDialog">
+<VBox maxWidth="315.0" minWidth="315.0" prefWidth="315.0" styleClass="appBody" stylesheets="@../styles/manager.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AboutAppDialog">
    <children>
       <VBox alignment="TOP_CENTER" spacing="15.0" styleClass="appWindow" VBox.vgrow="ALWAYS">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/logo.png" />
+                  <Image url="@../images/icon.png" />
                </image>
                <VBox.margin>
                   <Insets top="40.0" />
@@ -41,7 +41,7 @@
                   <Insets top="-10.0" />
                </VBox.margin>
             </HBox>
-            <Label fx:id="descriptionLabel" text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriescriptionDescriptionDescriptionDescriptionDescriptionDescriptionescriptionDescriptionDescriptionDescriptionDescriptionDescriptionptionDescription" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+            <Label fx:id="descriptionLabel" text="Description here..." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="11.0" />
                </font>

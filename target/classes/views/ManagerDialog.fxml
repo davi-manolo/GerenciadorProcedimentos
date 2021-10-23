@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="590.0" maxWidth="910.0" minHeight="590.0" minWidth="910.0" prefHeight="590.0" prefWidth="910.0" styleClass="appBody" stylesheets="@../styles/manager.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerDialog">
+<VBox alignment="CENTER" maxHeight="590.0" maxWidth="910.0" minHeight="590.0" minWidth="910.0" prefHeight="590.0" prefWidth="910.0" styleClass="appBody" stylesheets="@../styles/manager.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManagerDialog">
    <children>
       <VBox styleClass="appWindow" VBox.vgrow="ALWAYS">
          <children>
@@ -50,11 +50,6 @@
                   </Text>
                   <ComboBox fx:id="periodBox" maxHeight="28.0" maxWidth="130.0" minHeight="28.0" minWidth="130.0" prefHeight="28.0" prefWidth="130.0" promptText="month year" styleClass="comboboxManager" />
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Text fx:id="testText" fill="#f8a34d" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessão iniciada em modo de testes">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Text>
                   <Button fx:id="procedureManagerButton" maxHeight="28.0" maxWidth="185.0" minHeight="28.0" minWidth="185.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="185.0" styleClass="procedureButton" text="Gerenciar Procedimentos" textFill="#797979">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -200,11 +195,11 @@
                            <children>
                               <Button fx:id="removeButton" minHeight="28.0" minWidth="100.0" mnemonicParsing="false" styleClass="buttonManager" text="Remover" textFill="WHITE" />
                               <Region HBox.hgrow="ALWAYS" />
-                              <Label text="message here">
+                              <Text fx:id="testText" fill="#f8a34d" strokeType="OUTSIDE" strokeWidth="0.0" text="Modo demonstração">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="System Bold Italic" size="14.0" />
                                  </font>
-                              </Label>
+                              </Text>
                               <Button fx:id="exportButton" minHeight="28.0" minWidth="150.0" mnemonicParsing="false" styleClass="buttonManager" text="Exportar Excel" textFill="WHITE">
                                  <font>
                                     <Font name="SF Pro" size="13.0" />

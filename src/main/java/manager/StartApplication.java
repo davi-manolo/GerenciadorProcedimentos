@@ -33,7 +33,7 @@ public class StartApplication extends Application {
     
     public static void main(String[] args) {
         Locale.setDefault(REGION);
-        SessionMode.full();//Modo de início de sessão (demo/full)
+        SessionMode.demo();//Modo de início de sessão (demo/full)
         launch(args);
     }
 
