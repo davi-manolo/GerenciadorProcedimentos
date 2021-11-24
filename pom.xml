@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.procedure.manager</groupId>
     <artifactId>ProcedureManager</artifactId>
-    <version>3.0.3</version>
+    <version>3.1.0</version>
     <name>Gerenciador de Procedimentos</name>
     <description>Criado com JavaFX 1.8 + Maven
 Elementos de UI/UX MacOS Big Sur
@@ -30,6 +30,11 @@ Gerencia procedimentos de serviços realizados com comissão.</description>
             <artifactId>poi</artifactId>
             <version>5.0.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
     <build>

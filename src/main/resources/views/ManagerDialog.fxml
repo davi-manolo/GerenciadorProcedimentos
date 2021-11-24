@@ -200,6 +200,15 @@
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                               </Text>
+                              <Button fx:id="sendMailButton" mnemonicParsing="false" styleClass="buttonManager">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/mail.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                               <Button fx:id="exportButton" minHeight="28.0" minWidth="150.0" mnemonicParsing="false" styleClass="buttonManager" text="Exportar Excel" textFill="WHITE">
                                  <font>
                                     <Font name="SF Pro" size="13.0" />

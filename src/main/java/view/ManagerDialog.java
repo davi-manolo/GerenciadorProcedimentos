@@ -46,6 +46,8 @@ public class ManagerDialog implements Initializable {
     @FXML
     private Button closeAppButton;
     @FXML
+    private Button sendMailButton;
+    @FXML
     private Button versionButton;
     @FXML
     private Button addButton;
@@ -170,6 +172,10 @@ public class ManagerDialog implements Initializable {
             clearComponents();
             loadTable();
             controller.defineReceivedTotalValue();
+        });
+        sendMailButton.setOnAction(action -> {
+            EmailDialog emailDialog = new EmailDialog();
+            emailDialog.open();
         });
         removeButton.setOnAction(action -> {
             controller.removeServiceProcedure(serviceProceduresTable
