@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,10 +23,18 @@ import utils.Email;
 import utils.MoveStageAction;
 
 public class EmailDialog implements Initializable {
-    
+
+    @FXML
+    private TextField inputEmails;
+    @FXML
+    private TextField inputSubject;
+    @FXML
+    private TextArea inputMesage;
     @FXML
     private Button closeAppButton;
-    
+    @FXML
+    private Button sendButton;
+
     public void open() {
         Platform.runLater(() -> {
             try {
@@ -47,20 +56,26 @@ public class EmailDialog implements Initializable {
             }
         });
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<String> list = new ArrayList<>();
-        list.add("davi.manolo@gmail.com");
-        
-        Email email = new Email("davi.manolo@gmail.com",list,"Teste Assunto","Descrição da mensagem");
-        email.send();
+        sendButton.setOnAction(action -> {
+            Email email = new Email("davi.manolo@gmail.com", //Autor do envio
+                    getMails(inputEmails.getText()),
+                    inputSubject.getText(),
+                    inputMesage.getText());
+            email.send();
+        });
     }
-    
+
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeAppButton.getScene().getWindow();
         stage.close();
     }
-    
+
+    private String[] getMails(String input) {
+        return input.trim().split(";");
+    }
+
 }

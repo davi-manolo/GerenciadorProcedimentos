@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.List;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
@@ -9,12 +8,12 @@ import org.apache.commons.mail.MultiPartEmail;
 public class Email {
 
     private String sender;
-    private List<String> recipientEmails;
+    private String[] recipientEmails;
     private String subject;
     private String mesage;
     private EmailAttachment attachment;
 
-    public Email(String sender, List<String> recipientEmails, String subject, String mesage) {
+    public Email(String sender, String[] recipientEmails, String subject, String mesage) {
         this.sender = sender;
         this.recipientEmails = recipientEmails;
         this.subject = subject;
@@ -24,22 +23,23 @@ public class Email {
     public void send() {
         MultiPartEmail email = new MultiPartEmail();
         email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
-        recipientEmails.forEach(recipientEmail -> {
+        for (String recipientEmail : recipientEmails) {
             try {
-                email.addTo(recipientEmail, "Destinatário"); //destinatario
-                email.setFrom(sender, "Me"); //remetente
+                email.addTo(recipientEmail); //destinatario
+                email.setFrom(sender); //remetente
                 email.setSubject(subject); //Assunto
                 email.setMsg(mesage); //conteudo do e-mail
-                email.setSmtpPort(587);
-                email.setAuthenticator(new DefaultAuthenticator("davimtv@live.com", "280812dm"));
-                if(attachment != null) {
-                   email.attach(attachment); // adiciona o anexo à mensagem
+                email.setSmtpPort(465);
+                email.setAuthenticator(new DefaultAuthenticator("davi.manolo@gmail.com", "Manolo1993%"));
+                email.setSSLOnConnect(true);
+                if (attachment != null) {
+                    email.attach(attachment); // adiciona o anexo à mensagem
                 }
                 email.send();
             } catch (EmailException e) {
                 System.out.println("Erro ao enviar email: " + e.getMessage());
             }
-        });
+        }
     }
 
     public void attachFile(String path, String name) {
