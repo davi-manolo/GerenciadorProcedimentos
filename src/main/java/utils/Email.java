@@ -7,13 +7,14 @@ import org.apache.commons.mail.MultiPartEmail;
 
 public class Email {
 
+    private String sender;
     private String[] recipientEmails;
     private String subject;
     private String mesage;
     private EmailAttachment attachment;
-    private PropertiesManager props = new PropertiesManager("emailProvider.properties");
 
-    public Email(String[] recipientEmails, String subject, String mesage) {
+    public Email(String sender, String[] recipientEmails, String subject, String mesage) {
+        this.sender = sender;
         this.recipientEmails = recipientEmails;
         this.subject = subject;
         this.mesage = mesage;
@@ -21,19 +22,18 @@ public class Email {
 
     public void send() {
         MultiPartEmail email = new MultiPartEmail();
-        email.setHostName(props.getValue("email.setting.hostname"));
+        email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
         for (String recipientEmail : recipientEmails) {
             try {
-                email.addTo(recipientEmail);
-                email.setFrom(props.getValue("email.sender"));
-                email.setSubject(subject);
-                email.setMsg(mesage);
-                email.setSmtpPort(Integer.valueOf(props.getValue("email.setting.port")));
-                email.setAuthenticator(new DefaultAuthenticator(props.getValue("email.sender"),
-                        props.getValue("email.password")));
-                email.setSSLOnConnect(Boolean.valueOf(props.getValue("email.setting.ssl")));
+                email.addTo(recipientEmail); //destinatario
+                email.setFrom(sender); //remetente
+                email.setSubject(subject); //Assunto
+                email.setMsg(mesage); //conteudo do e-mail
+                email.setSmtpPort(465);
+                email.setAuthenticator(new DefaultAuthenticator("davi.manolo@gmail.com", "Manolo1993%"));
+                email.setSSLOnConnect(true);
                 if (attachment != null) {
-                    email.attach(attachment);
+                    email.attach(attachment); // adiciona o anexo à mensagem
                 }
                 email.send();
             } catch (EmailException e) {
