@@ -52,11 +52,11 @@
                         <TextField fx:id="inputEmails" minHeight="28.0" promptText="email@email.com; email@email.com" styleClass="textfieldManager" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <TextArea fx:id="inputMesage" prefHeight="200.0" prefWidth="200.0" promptText="Descrição da mensagem..." styleClass="textfieldManager" VBox.vgrow="ALWAYS" />
+                  <TextArea fx:id="inputMesage" prefHeight="200.0" prefWidth="200.0" promptText="Descrição da mensagem..." styleClass="textfieldManager" wrapText="true" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" styleClass="buttonManager" text="Anexo" />
-                        <Label text="Description file" textFill="#c3c3c3">
+                        <Button fx:id="attachmentButton" mnemonicParsing="false" styleClass="buttonManager" text="Anexo" />
+                        <Label fx:id="descriptionAttachment" text="Description file" textFill="#c3c3c3">
                            <font>
                               <Font name="System Italic" size="13.0" />
                            </font>

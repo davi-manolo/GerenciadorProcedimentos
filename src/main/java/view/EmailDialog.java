@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,11 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,9 +35,14 @@ public class EmailDialog implements Initializable {
     @FXML
     private Button closeAppButton;
     @FXML
+    private Button attachmentButton;
+    @FXML
     private Button sendButton;
+    @FXML
+    private Label descriptionAttachment;
     
     private PropertiesManager props = new PropertiesManager("emailProvider.properties");
+    private File attachment;
 
     public void open() {
         Platform.runLater(() -> {
@@ -60,9 +68,20 @@ public class EmailDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        descriptionAttachment.setVisible(false);
         inputEmails.setText(props.getValue("email.default.recipients"));
         inputSubject.setText(props.getValue("email.default.subject"));
         inputMesage.setText(props.getValue("email.default.mesage"));
+        attachmentButton.setOnAction(action -> {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter
+                    = new FileChooser.ExtensionFilter("Microsoft Excel", "*.xls");
+            fileChooser.getExtensionFilters().add(extFilter);
+            attachment = fileChooser.showOpenDialog(new Stage());
+            descriptionAttachment.setVisible(true);
+            descriptionAttachment.setText(attachment.getName());
+            Email.attachFile(attachment.getAbsolutePath(), attachment.getName());
+        });
         sendButton.setOnAction(action -> {
             Email email = new Email(
                     getMails(inputEmails.getText()),
