@@ -2,8 +2,6 @@ package view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Email;
 import utils.MoveStageAction;
+import utils.PropertiesManager;
 
 public class EmailDialog implements Initializable {
 
@@ -34,6 +33,8 @@ public class EmailDialog implements Initializable {
     private Button closeAppButton;
     @FXML
     private Button sendButton;
+    
+    private PropertiesManager props = new PropertiesManager("emailProvider.properties");
 
     public void open() {
         Platform.runLater(() -> {
@@ -59,8 +60,11 @@ public class EmailDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        inputEmails.setText(props.getValue("email.default.recipients"));
+        inputSubject.setText(props.getValue("email.default.subject"));
+        inputMesage.setText(props.getValue("email.default.mesage"));
         sendButton.setOnAction(action -> {
-            Email email = new Email("davi.manolo@gmail.com", //Autor do envio
+            Email email = new Email(
                     getMails(inputEmails.getText()),
                     inputSubject.getText(),
                     inputMesage.getText());
