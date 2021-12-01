@@ -7,12 +7,14 @@ import org.apache.commons.mail.MultiPartEmail;
 
 public class Email {
 
+    private String sender;
     private String[] recipientEmails;
     private String subject;
     private String mesage;
+
     private static EmailAttachment attachment;
     private PropertiesManager props = new PropertiesManager("emailProvider.properties");
-    
+
     public Email(String[] recipientEmails, String subject, String mesage) {
         this.recipientEmails = recipientEmails;
         this.subject = subject;

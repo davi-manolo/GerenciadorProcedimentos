@@ -3,6 +3,8 @@ package view;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -71,11 +73,12 @@ public class EmailDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         sendButton.disableProperty().bind(
                 inputEmails.textProperty().isEmpty()
-                .or(inputMesage.textProperty().isEmpty())
-                .or(inputSubject.textProperty().isEmpty())
-                .or(descriptionAttachment.textProperty().isEmpty()));
+                        .or(inputMesage.textProperty().isEmpty())
+                        .or(inputSubject.textProperty().isEmpty())
+                        .or(descriptionAttachment.textProperty().isEmpty()));
         labelProgress.setVisible(false);
         descriptionAttachment.setVisible(false);
         inputEmails.setText(props.getValue("email.default.recipients"));
@@ -91,6 +94,7 @@ public class EmailDialog implements Initializable {
             descriptionAttachment.setText(attachment.getName());
             Email.attachFile(attachment.getAbsolutePath(), attachment.getName());
         });
+
         sendButton.setOnAction(action -> {
             Email email = new Email(
                     getMails(inputEmails.getText()),
