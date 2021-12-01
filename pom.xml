@@ -6,8 +6,8 @@
     <version>3.1.0</version>
     <name>Gerenciador de Procedimentos</name>
     <description>Criado com JavaFX 1.8 + Maven
-Elementos de UI/UX MacOS Big Sur
-Gerencia procedimentos de serviços realizados com comissão.</description>
+        Elementos de UI/UX MacOS Big Sur
+        Gerencia procedimentos de serviços realizados com comissão.</description>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,6 +35,11 @@ Gerencia procedimentos de serviços realizados com comissão.</description>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
         </dependency>
     </dependencies>
     <build>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +41,9 @@ public class EmailDialog implements Initializable {
     private Button sendButton;
     @FXML
     private Label descriptionAttachment;
-    
+    @FXML
+    private Label labelProgress;
+
     private PropertiesManager props = new PropertiesManager("emailProvider.properties");
     private File attachment;
 
@@ -68,6 +71,12 @@ public class EmailDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sendButton.disableProperty().bind(
+                inputEmails.textProperty().isEmpty()
+                .or(inputMesage.textProperty().isEmpty())
+                .or(inputSubject.textProperty().isEmpty())
+                .or(descriptionAttachment.textProperty().isEmpty()));
+        labelProgress.setVisible(false);
         descriptionAttachment.setVisible(false);
         inputEmails.setText(props.getValue("email.default.recipients"));
         inputSubject.setText(props.getValue("email.default.subject"));
@@ -88,7 +97,10 @@ public class EmailDialog implements Initializable {
                     inputSubject.getText(),
                     inputMesage.getText());
             email.send();
+            labelProgress.setVisible(true);
+            labelProgress.setText("Email enviado!");
         });
+
     }
 
     @FXML

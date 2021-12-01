@@ -56,12 +56,17 @@
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <Button fx:id="attachmentButton" mnemonicParsing="false" styleClass="buttonManager" text="Anexo" />
-                        <Label fx:id="descriptionAttachment" text="Description file" textFill="#c3c3c3">
+                        <Label fx:id="descriptionAttachment" textFill="#c3c3c3">
                            <font>
                               <Font name="System Italic" size="13.0" />
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="labelProgress" text="Progress" textFill="#37b59c">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font>
+                        </Label>
                         <Button fx:id="sendButton" minHeight="28.0" minWidth="100.0" mnemonicParsing="false" styleClass="buttonManager" text=" Enviar">
                            <graphic>
                               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
