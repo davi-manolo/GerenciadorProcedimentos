@@ -161,7 +161,6 @@ public class ManagerDialog implements Initializable {
             ObservableList<ProcedureTypeModel> typesList = FXCollections.observableArrayList();
             typesList.addAll(controller.getProcedureTypeList());
             proceduresTypesBox.setItems(typesList);
-
         });
         versionButton.setOnAction(action -> {
             AboutAppDialog appDialog = new AboutAppDialog();
