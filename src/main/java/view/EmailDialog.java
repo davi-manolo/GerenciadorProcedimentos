@@ -3,10 +3,7 @@ package view;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +25,7 @@ import utils.MoveStageAction;
 import utils.PropertiesManager;
 
 public class EmailDialog implements Initializable {
-
+    
     @FXML
     private TextField inputEmails;
     @FXML
@@ -45,10 +42,10 @@ public class EmailDialog implements Initializable {
     private Label descriptionAttachment;
     @FXML
     private Label labelProgress;
-
+    
     private PropertiesManager props = new PropertiesManager("emailProvider.properties");
     private File attachment;
-
+    
     public void open() {
         Platform.runLater(() -> {
             try {
@@ -70,10 +67,10 @@ public class EmailDialog implements Initializable {
             }
         });
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
         sendButton.disableProperty().bind(
                 inputEmails.textProperty().isEmpty()
                         .or(inputMesage.textProperty().isEmpty())
@@ -94,8 +91,9 @@ public class EmailDialog implements Initializable {
             descriptionAttachment.setText(attachment.getName());
             Email.attachFile(attachment.getAbsolutePath(), attachment.getName());
         });
-
+        
         sendButton.setOnAction(action -> {
+            
             Email email = new Email(
                     getMails(inputEmails.getText()),
                     inputSubject.getText(),
@@ -103,18 +101,28 @@ public class EmailDialog implements Initializable {
             email.send();
             labelProgress.setVisible(true);
             labelProgress.setText("Email enviado!");
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                    Platform.runLater(() -> closeButtonAction());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            ).start();
+            
         });
-
+        
     }
-
+    
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeAppButton.getScene().getWindow();
         stage.close();
     }
-
+    
     private String[] getMails(String input) {
         return input.trim().split(";");
     }
-
+    
 }
