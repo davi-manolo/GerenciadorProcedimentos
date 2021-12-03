@@ -55,7 +55,14 @@
                   <TextArea fx:id="inputMesage" prefHeight="200.0" prefWidth="200.0" promptText="Descrição da mensagem..." styleClass="textfieldManager" wrapText="true" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
-                        <Button fx:id="attachmentButton" mnemonicParsing="false" styleClass="buttonManager" text="Anexo" />
+                        <Button fx:id="attachmentButton" minHeight="28.0" mnemonicParsing="false" styleClass="buttonManager">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/clip.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Label fx:id="descriptionAttachment" textFill="#c3c3c3">
                            <font>
                               <Font name="System Italic" size="13.0" />
@@ -67,7 +74,7 @@
                               <Font name="System Bold Italic" size="13.0" />
                            </font>
                         </Label>
-                        <Button fx:id="sendButton" minHeight="28.0" minWidth="100.0" mnemonicParsing="false" styleClass="buttonManager" text=" Enviar">
+                        <Button fx:id="sendButton" minHeight="28.0" minWidth="80.0" mnemonicParsing="false" styleClass="buttonManager" text=" Enviar">
                            <graphic>
                               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
