@@ -66,6 +66,8 @@ public class ManagerDialog implements Initializable {
     @FXML
     private Label totalReceivedLabel;
     @FXML
+    private Label totalCostumersLabel;
+    @FXML
     private ComboBox<ProcedureTypeModel> proceduresTypesBox;
     @FXML
     private TableView<ServiceProcedureModel> serviceProceduresTable;
@@ -202,6 +204,10 @@ public class ManagerDialog implements Initializable {
                 .or(priceField.textProperty().isEmpty())
                 .or(proceduresTypesBox.getSelectionModel().selectedItemProperty().isNull())
         );
+        totalCostumersLabel.textProperty().bind(Bindings
+                .size(serviceProceduresTable.getItems())
+                .asString("%s Procedimentos realizados"));
+        
         removeButton.disableProperty().bind(serviceProceduresTable.getSelectionModel()
                 .selectedItemProperty().isNull());
         exportButton.disableProperty().bind(Bindings.isEmpty(serviceProceduresTable.getItems()));
