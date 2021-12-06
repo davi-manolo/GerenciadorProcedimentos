@@ -289,3 +289,11 @@
     -fx-background-image: url('../images/editHover.png');
     -fx-cursor: hand;
 }
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+}

@@ -46,6 +46,8 @@ public class ManagerDialog implements Initializable {
     @FXML
     private Button closeAppButton;
     @FXML
+    private Button sendMailButton;
+    @FXML
     private Button versionButton;
     @FXML
     private Button addButton;
@@ -63,6 +65,8 @@ public class ManagerDialog implements Initializable {
     private ComboBox<ServiceProcedurePeriod> periodBox;
     @FXML
     private Label totalReceivedLabel;
+    @FXML
+    private Label totalCostumersLabel;
     @FXML
     private ComboBox<ProcedureTypeModel> proceduresTypesBox;
     @FXML
@@ -159,7 +163,6 @@ public class ManagerDialog implements Initializable {
             ObservableList<ProcedureTypeModel> typesList = FXCollections.observableArrayList();
             typesList.addAll(controller.getProcedureTypeList());
             proceduresTypesBox.setItems(typesList);
-
         });
         versionButton.setOnAction(action -> {
             AboutAppDialog appDialog = new AboutAppDialog();
@@ -170,6 +173,10 @@ public class ManagerDialog implements Initializable {
             clearComponents();
             loadTable();
             controller.defineReceivedTotalValue();
+        });
+        sendMailButton.setOnAction(action -> {
+            EmailDialog emailDialog = new EmailDialog();
+            emailDialog.open();
         });
         removeButton.setOnAction(action -> {
             controller.removeServiceProcedure(serviceProceduresTable
@@ -197,6 +204,10 @@ public class ManagerDialog implements Initializable {
                 .or(priceField.textProperty().isEmpty())
                 .or(proceduresTypesBox.getSelectionModel().selectedItemProperty().isNull())
         );
+        totalCostumersLabel.textProperty().bind(Bindings
+                .size(serviceProceduresTable.getItems())
+                .asString("%s Procedimentos realizados"));
+        
         removeButton.disableProperty().bind(serviceProceduresTable.getSelectionModel()
                 .selectedItemProperty().isNull());
         exportButton.disableProperty().bind(Bindings.isEmpty(serviceProceduresTable.getItems()));
