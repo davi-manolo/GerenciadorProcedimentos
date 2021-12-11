@@ -38,7 +38,7 @@ import utils.GenerateExcelFile;
 import utils.ServiceProcedurePeriod;
 
 public class ManagerDialog implements Initializable {
-    
+
     private ServiceProcedureController controller = new ServiceProcedureController(this);
 
     @FXML
@@ -91,6 +91,13 @@ public class ManagerDialog implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         controller.startSession();
+        YearMonth current = YearMonth.now();
+        int year = current.getYear();
+        while (current.getMonthValue() >= 1 && current.getYear() == year) {
+            periodBox.getItems().add(new ServiceProcedurePeriod(current));
+            current = current.minusMonths(1);
+        }
+        periodBox.getSelectionModel().selectFirst();
         serviceProceduresTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         permormedInColumn.setCellValueFactory(obj
                 -> new ReadOnlyObjectWrapper<>(
@@ -151,7 +158,7 @@ public class ManagerDialog implements Initializable {
                         procedureHBox.getChildren().add(editButton);
 
                     });
-                    disableButtonsByPeriod(button);
+                    disableButtonsByPeriodProperty(button);
                 }
             }
 
@@ -196,42 +203,20 @@ public class ManagerDialog implements Initializable {
         periodBox.setOnAction(action -> {
             loadTable();
             controller.defineReceivedTotalValue();
-            disableButtonsByPeriod(addButton, removeButton);
-        });
-
-        addButton.disableProperty().bind(datePicker.valueProperty().isNull()
-                .or(clientField.textProperty().isEmpty())
-                .or(priceField.textProperty().isEmpty())
-                .or(proceduresTypesBox.getSelectionModel().selectedItemProperty().isNull())
-        );
-        totalCostumersLabel.textProperty().bind(Bindings
-                .size(serviceProceduresTable.getItems())
-                .asString("%s Procedimentos realizados"));
-        
-        removeButton.disableProperty().bind(serviceProceduresTable.getSelectionModel()
-                .selectedItemProperty().isNull());
-        exportButton.disableProperty().bind(Bindings.isEmpty(serviceProceduresTable.getItems()));
-        priceField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*(,(\\d)?(\\d)?)?")) {
-                priceField.setText(newValue.replaceAll("[^\\d]", ""));
+            if(!disableButtonsByPeriodProperty(addButton, removeButton)) {
+                setBindsProperty();
             }
         });
 
-        YearMonth current = YearMonth.now();
-        int year = current.getYear();
-        while (current.getMonthValue() >= 1 && current.getYear() == year) {
-            periodBox.getItems().add(new ServiceProcedurePeriod(current));
-            current = current.minusMonths(1);
-        }
-
-        periodBox.getSelectionModel().selectFirst();
+        setBindsProperty();
+        
         proceduresTypesBox.getItems().addAll(controller.getProcedureTypeList());
         loadTable();
         controller.defineReceivedTotalValue();
 
     }
 
-    private void disableButtonsByPeriod(Button ...buttons) {
+    private boolean disableButtonsByPeriodProperty(Button... buttons) {
         YearMonth periodSelected
                 = periodBox.getSelectionModel().getSelectedItem().getPeriod();
         SimpleBooleanProperty binding
@@ -239,6 +224,27 @@ public class ManagerDialog implements Initializable {
         for (Button button : buttons) {
             button.disableProperty().bind(binding);
         }
+        return binding.get();
+    }
+
+    private void setBindsProperty() {
+        addButton.disableProperty().bind(datePicker.valueProperty().isNull()
+                .or(clientField.textProperty().isEmpty())
+                .or(priceField.textProperty().isEmpty())
+                .or(proceduresTypesBox.getSelectionModel().selectedItemProperty().isNull())
+        );
+        removeButton.disableProperty().bind(serviceProceduresTable.getSelectionModel()
+                .selectedItemProperty().isNull());
+        totalCostumersLabel.textProperty().bind(Bindings
+                .size(serviceProceduresTable.getItems())
+                .asString("%s Procedimentos realizados"));
+
+        exportButton.disableProperty().bind(Bindings.isEmpty(serviceProceduresTable.getItems()));
+        priceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*(,(\\d)?(\\d)?)?")) {
+                priceField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     private void loadTable() {
@@ -262,7 +268,7 @@ public class ManagerDialog implements Initializable {
         Stage stage = (Stage) closeAppButton.getScene().getWindow();
         stage.close();
     }
-    
+
     public void setTotalReceivedLabel(String value) {
         totalReceivedLabel.setText(value);
     }
@@ -286,7 +292,7 @@ public class ManagerDialog implements Initializable {
     public TableView<ServiceProcedureModel> getServiceProceduresTable() {
         return serviceProceduresTable;
     }
-    
+
     public Text getTestText() {
         return testText;
     }
