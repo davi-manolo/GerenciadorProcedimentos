@@ -92,8 +92,8 @@ public class ManagerDialog implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         controller.startSession();
         YearMonth current = YearMonth.now();
-        int year = current.getYear();
-        while (current.getMonthValue() >= 1 && current.getYear() == year) {
+        int year = current.getYear() - 1;
+        while (current.getMonthValue() >= 1 && current.getYear() >= year) {
             periodBox.getItems().add(new ServiceProcedurePeriod(current));
             current = current.minusMonths(1);
         }

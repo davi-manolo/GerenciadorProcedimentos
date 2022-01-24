@@ -71,6 +71,7 @@ public abstract class ProcedureManagerDB {
     //Usar na tela de conexões da aplicação, ainda não construída.
     //Ainda em desenvolvimento
     @SuppressWarnings("unused")
+    @Deprecated
     private static boolean createDatabase() {
         String databaseSQL = "create database procedures_db;";
         String typeTableSQL = "create table procedures_db.procedures_type(" + "\n" +
