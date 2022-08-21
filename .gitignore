@@ -2,6 +2,7 @@
 /.classpath
 /.project
 /.settings
+/.idea
 /target
 nb-configuration.xml
 nbactions.xml
