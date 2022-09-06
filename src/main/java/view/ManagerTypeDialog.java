@@ -75,6 +75,14 @@ public class ManagerTypeDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        addButton.disableProperty().bind(
+                procedureField.textProperty().isEmpty()
+                .or(porcentField.textProperty().isEmpty()));
+
+        removeButton.disableProperty().bind(procedureTypeTable.getSelectionModel()
+                .selectedItemProperty().isNull());
+
         procedureTypeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         profitPorcentColumn.setCellValueFactory(obj
